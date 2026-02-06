@@ -288,7 +288,7 @@ var Main = (function() {
             
             var $title = $('<div>');
 
-            $title.text(obj.streamTitle || "(No title)");
+            $title.text(obj.streamTitle);
             $streamE.append($title);
             
             addGameDisplay(obj, $streamE, $thumbnailCtnr);
@@ -606,7 +606,6 @@ var Main = (function() {
                 Util.curry(clickCallback, helpTextId, this)
             );
         });
-            
             
         if (Settings.hasStorage()) {
             Settings.storageToFields();

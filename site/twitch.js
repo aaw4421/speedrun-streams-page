@@ -278,7 +278,7 @@ var Twitch = (function() {
             streamDict.thumbnailUrl = stream.thumbnail_url.replace("{width}", "240").replace("{height}", "135");
             
             streamDict.streamTitle = stream.title
-              || "(Failed to load title)";
+              || "​";
             
             if (stream.game_id || stream.game_name) {
                 streamDict.gameName = stream.game_name

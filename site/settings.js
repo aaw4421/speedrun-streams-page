@@ -113,10 +113,16 @@ var Settings = {
         var storageNeedsUpdate = false;
         
         settingsKeys.forEach(function(key) {
-            if (localStorage.hasOwnProperty(key) && !isNaN(localStorage.getItem(key))) {
-                // Use JSON.parse since local storage can only have strings,
-                // while our settings can be in any format.
-                Settings.setInField(key, JSON.parse(localStorage[key]));
+            if (localStorage.hasOwnProperty(key) && localStorage.getItem(key)) {
+                try {
+                    // Use JSON.parse since local storage can only have strings,
+                    // while our settings can be in any format.
+                    Settings.setInField(key, JSON.parse(localStorage[key]));
+                } catch {
+                    // Catches a SyntaxError if we're tryng to parse bad JSON.
+                    Settings.setInField(key, Settings.defaults[key]);
+                    storageNeedsUpdate = true;
+                }
             }
             else {
                 Settings.setInField(key, Settings.defaults[key]);
